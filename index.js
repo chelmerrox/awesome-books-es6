@@ -1,8 +1,9 @@
-const addBookForm = document.getElementById('add-books-form');
+export const addBookForm = document.getElementById('add-books-form');
 const bookList = document.querySelector('.book-list');
 const displayDate = document.querySelector('.date');
 
-class Books {
+// Books class
+export default class Books {
   constructor(bookLists = []) {
     this.bookLists = bookLists;
     this.getFromLocal();
@@ -48,8 +49,8 @@ class Books {
     this.displayBook(bookObject, this.bookLists.length - 1);
   }
 
+  // check local storage before adding a book (upon first visit to page or reload of page)
   getFromLocal() {
-    // check local storage before adding a book
     if (localStorage.getItem('booksCollection')) {
       this.bookLists = JSON.parse(localStorage.getItem('booksCollection'));
 
@@ -63,27 +64,8 @@ class Books {
   }
 }
 
-const books = new Books();
-
-addBookForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const title = document.querySelector('.titleField');
-  const author = document.querySelector('.authorField');
-
-  if (title.value !== '' && author.value !== '') {
-    const newBook = {
-      title: title.value,
-      author: author.value,
-    };
-
-    books.addBook(newBook);
-    addBookForm.reset();
-  }
-});
-
-// DISPLAY DATE ON THE DOM
-const realTime = () => {
+// Display the Date & Time on the DOM
+export const realTime = () => {
   const date = new Date();
   const dateOptions = {
     month: 'long',
@@ -105,24 +87,10 @@ const realTime = () => {
   setTimeout(() => { realTime(); }, 1000);
 };
 
-realTime();
-
-const navLinks = Array.from(
+// Array of all navbar links
+export const navLinks = Array.from(
   document.body.querySelectorAll('header nav ul li a'),
 );
 
-const sections = Array.from(document.body.querySelectorAll('section'));
-
-navLinks.forEach((navLink) => {
-  navLink.addEventListener('click', () => {
-    const idForSectionToShow = navLink.getAttribute('href');
-    sections.forEach((section) => {
-      const id = section.getAttribute('id');
-      if (`#${id}` === idForSectionToShow) {
-        section.classList.remove('hidden');
-      } else {
-        section.classList.add('hidden');
-      }
-    });
-  });
-});
+// Array of all <section> elements
+export const sections = Array.from(document.body.querySelectorAll('section'));
