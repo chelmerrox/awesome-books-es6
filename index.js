@@ -1,6 +1,7 @@
 export const addBookForm = document.getElementById('add-books-form');
 const bookList = document.querySelector('.book-list');
 const displayDate = document.querySelector('.date');
+export const small = document.querySelector('small');
 
 // Books class
 export default class Books {
