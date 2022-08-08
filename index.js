@@ -1,6 +1,11 @@
 import Books, { addBookForm, bookList } from './modules/books.js'
-import { realTime } from "./modules/date-and-time.js"
+import { DateTime } from "./modules/luxon.js"
 import { navLinks, sections } from "./modules/navlinks-and-sections.js"
+
+const displayDate = document.querySelector('.date');
+const today = DateTime.now();
+
+displayDate.innerHTML = `${today.toLocaleString(DateTime.DATETIME_MED)}`;
 
 const small = document.querySelector('small');
 
@@ -31,8 +36,6 @@ addBookForm.addEventListener('submit', (e) => {
 
   addBookForm.reset();
 });
-
-realTime();
 
 // Show or Hide Sections when a navbar link is clicked
 navLinks.forEach((navLink) => {
