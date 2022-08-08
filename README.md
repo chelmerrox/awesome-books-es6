@@ -13,11 +13,11 @@
 
 ## Preview
 
-![Website preview](images/preview.png)
+![Website preview](./preview.png)
 
 ## Live Demo
 
-[Live Demo Link]()
+[Live Demo Link](https://raw.githack.com/chelmerrox/awesome-books-es6/milestone-1/index.html)
 
 ## Getting Started
 
