@@ -1,7 +1,7 @@
-const displayDate = document.querySelector('.date');
+//const displayDate = document.querySelector('.date');
 
 // Display the Date & Time on the DOM
-export const realTime = () => {
+/*export const realTime = () => {
   const date = new Date();
   const dateOptions = {
     month: 'long',
@@ -21,4 +21,4 @@ export const realTime = () => {
   displayDate.innerHTML = `${currentDate} ${currentTime}`;
 
   setTimeout(() => { realTime(); }, 1000);
-};
+};*/
