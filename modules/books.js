@@ -1,5 +1,5 @@
 export const addBookForm = document.getElementById('add-books-form');
-export const bookList = document.querySelector('.book-list');
+const bookList = document.querySelector('.book-list');
 
 // Books class
 export default class Books {
