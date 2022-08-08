@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="index.css" type="text/css" rel="stylesheet"/>  
+    <title>Awesome Books ES6</title>
+  </head>
+  
+  <body>
+    <header>
+      <nav>
+        <div class="brand">Awesome Books</div>
+
+        <ul>
+          <li>
+            <a href="#list">List</a>
+          </li>
+          <li>
+            <a href="#add-new">Add new</a>
+          </li>
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="date">Date</div>
+    </header>
+
+    <main>
+      <h1>All Awesome Books with ES6</h1>
+
+      <section id="list" class="book-list"></section>
+
+      <section id="add-new" class="add-book hidden">
+        <h2>Add a new book</h2>
+        <form id="add-books-form">
+          <input class="titleField" name="title" placeholder="Title" /> <br />
+          <br />
+          <input class="authorField" name="author" placeholder="Author" />
+          <br />
+          <br />
+          <small></small>
+          <button type="submit">Add</button>
+        </form>
+      </section>
+
+      <section id="contact" class="contact-info hidden">
+        <h2>Contact Information</h2>
+
+        <p>
+          Do you have any questions or do you want to just say "Hello?" You can
+          reach out to us!
+        </p>
+
+        <ul>
+          <li>
+            <strong>Our email:</strong><a href="mailto:awesomebooks@gmail.com">awesomebooks@gmail.com</a>
+          </li>
+          <li>
+            <strong>Our phone number:</strong><a href="tel:+21308209383892730">+21308209383892730</a>
+          </li>
+          <li><strong>Our address:</strong> 21 Street, City, Country.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>Copyright</footer>
+
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>
