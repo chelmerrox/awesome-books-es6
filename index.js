@@ -1,97 +1,50 @@
-export const addBookForm = document.getElementById('add-books-form');
-const bookList = document.querySelector('.book-list');
-const displayDate = document.querySelector('.date');
-export const small = document.querySelector('small');
+import Books, { addBookForm, bookList } from './modules/books.js'
+import { realTime } from "./modules/date-and-time.js"
+import { navLinks, sections } from "./modules/navlinks-and-sections.js"
 
-// Books class
-export default class Books {
-  constructor(bookLists = []) {
-    this.bookLists = bookLists;
-    this.getFromLocal();
-  }
+const small = document.querySelector('small');
 
-  removeBook(bookObject, index) {
-    const bookInfo2 = document.getElementById(index);
-    const { title, author } = bookObject;
+const books = new Books();
 
-    this.bookLists = this.bookLists.filter(
-      (book) => book.title !== title && book.author !== author,
-    );
-    localStorage.setItem('booksCollection', JSON.stringify(this.bookLists));
-    bookList.removeChild(bookInfo2);
-  }
+addBookForm.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-  displayBook(bookObject, index) {
-    const bookInfo = document.createElement('div');
-    bookInfo.classList = 'bookInfo';
-    bookInfo.id = index;
+  const title = document.querySelector('.titleField');
+  const author = document.querySelector('.authorField');
 
-    bookInfo.innerHTML = `
-      <p class="book-details">"${bookObject.title}" by ${bookObject.author}</p>
-    `;
-
-    const removeBtn = document.createElement('button');
-    removeBtn.classList = 'remove-btn';
-    removeBtn.innerText = 'Remove';
-
-    bookInfo.appendChild(removeBtn);
-    bookList.prepend(bookInfo);
-
-    removeBtn.onclick = () => {
-      this.removeBook(bookObject, index);
+  if (title.value !== '' && author.value !== '') {
+    const newBook = {
+      title: title.value,
+      author: author.value,
     };
+
+    books.addBook(newBook);
+
+    small.innerText = 'Success! Book had been added.';
+    small.style.color = '#0bcf0b';
+    small.style.fontSize = '19px';
+  } else {
+    small.innerText = 'Please add the book\'s name & author\'s name!'
+    small.style.color = 'red';
+    small.style.fontSize = '19px';
   }
 
-  addBook(bookObject) {
-    this.bookLists.push(bookObject);
+  addBookForm.reset();
+});
 
-    localStorage.setItem('booksCollection', JSON.stringify(this.bookLists));
+realTime();
 
-    this.displayBook(bookObject, this.bookLists.length - 1);
-  }
-
-  // check local storage before adding a book (upon first visit to page or reload of page)
-  getFromLocal() {
-    if (localStorage.getItem('booksCollection')) {
-      this.bookLists = JSON.parse(localStorage.getItem('booksCollection'));
-
-      this.bookLists.forEach((book, index) => {
-        this.displayBook(book, index);
-      });
-    } else {
-      localStorage.setItem('booksCollection', '');
-      this.bookLists = [];
-    }
-  }
-}
-
-// Display the Date & Time on the DOM
-export const realTime = () => {
-  const date = new Date();
-  const dateOptions = {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  };
-
-  const timeOptions = {
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric',
-    hour12: true,
-  };
-
-  const currentDate = date.toLocaleDateString('en-GB', dateOptions);
-  const currentTime = date.toLocaleTimeString('en-GB', timeOptions);
-  displayDate.innerHTML = `${currentDate} ${currentTime}`;
-
-  setTimeout(() => { realTime(); }, 1000);
-};
-
-// Array of all navbar links
-export const navLinks = Array.from(
-  document.body.querySelectorAll('header nav ul li a'),
-);
-
-// Array of all <section> elements
-export const sections = Array.from(document.body.querySelectorAll('section'));
+// Show or Hide Sections when a navbar link is clicked
+navLinks.forEach((navLink) => {
+  navLink.addEventListener('click', () => {
+    const idForSectionToShow = navLink.getAttribute('href');
+    sections.forEach((section) => {
+      const id = section.getAttribute('id');
+      if (`#${id}` === idForSectionToShow) {
+        section.classList.remove('hidden');
+      } else {
+        section.classList.add('hidden');
+      }
+    });
+  });
+});
