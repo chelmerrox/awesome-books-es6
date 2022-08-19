@@ -15,6 +15,11 @@ export default class Books {
     this.bookLists = this.bookLists.filter(
       (book) => book.title !== title && book.author !== author,
     );
+
+    if (this.bookLists.length === 0) {
+      bookList.classList.remove('active');
+    }
+
     localStorage.setItem('booksCollection', JSON.stringify(this.bookLists));
     bookList.removeChild(bookInfo2);
   }
@@ -24,20 +29,26 @@ export default class Books {
     bookInfo.classList = 'bookInfo';
     bookInfo.id = index;
 
-    bookInfo.innerHTML = `
-      <p class="book-details">"${bookObject.title}" by ${bookObject.author}</p>
-    `;
+    if (this.bookLists.length === 0){
+      bookList.classList.remove('active');
+    } else {
+      bookList.classList.add('active');
 
-    const removeBtn = document.createElement('button');
-    removeBtn.classList = 'remove-btn';
-    removeBtn.innerText = 'Remove';
+      bookInfo.innerHTML = `
+        <p class="book-details">"${bookObject.title}" by ${bookObject.author}</p>
+      `;
 
-    bookInfo.appendChild(removeBtn);
-    bookList.prepend(bookInfo);
+      const removeBtn = document.createElement('button');
+      removeBtn.classList = 'remove-btn';
+      removeBtn.innerText = 'Remove';
 
-    removeBtn.onclick = () => {
-      this.removeBook(bookObject, index);
-    };
+      bookInfo.appendChild(removeBtn);
+      bookList.prepend(bookInfo);
+
+      removeBtn.onclick = () => {
+        this.removeBook(bookObject, index);
+      };
+    }
   }
 
   addBook(bookObject) {

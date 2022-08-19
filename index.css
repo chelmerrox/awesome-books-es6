@@ -28,6 +28,10 @@ h2 {
 }
 
 .book-list {
+  border: none;
+}
+
+.book-list.active {
   margin: 1rem;
   border: 2px solid #000;
 }
