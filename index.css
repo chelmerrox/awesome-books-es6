@@ -64,8 +64,9 @@ h2 {
 }
 
 #add-books-form input::placeholder {
-  color: #000;
+  color: #999999;
   font-size: 17px;
+  font-style: italic;
 }
 
 button {
